@@ -1,35 +1,67 @@
+<!--
+  ~ Copyright 2014 Red Hat, Inc.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <idea-plugin version="2">
-  <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
-  <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <id>org.intellij.yang</id>
+  <name>Yang Language Plugin</name>
+  <version>3.01</version>
+  <vendor email="ljm625@gmail.com" url="http://opendaylight.xyz">Jiaming Li</vendor>
+  <vendor email="dave@dtucker.co.uk" url="http://dtucker.co.uk">Dave Tucker</vendor>
 
   <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+      This plugin adds support for Yang to IntelliJ
     ]]></description>
 
   <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      Nothing to report
     ]]>
   </change-notes>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-  <idea-version since-build="141.0"/>
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
 
-  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
   <!-- uncomment to enable plugin in all products
   <depends>com.intellij.modules.lang</depends>
   -->
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+    <fileTypeFactory implementation="com.intellij.lang.yang.YangFileTypeFactory"/>
+    <lang.parserDefinition language="Yang" implementationClass="com.intellij.lang.yang.YangParserDefinition"/>
+    <lang.syntaxHighlighterFactory implementationClass="com.intellij.lang.yang.editor.YangSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="com.intellij.lang.yang.editor.YangColorSettingsPage"/>
+    <completion.contributor language="Yang" implementationClass="com.intellij.lang.yang.YangCompletionContributor"/>
   </extensions>
 
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
   <actions>
-    <!-- Add your actions here -->
+    <action id="Yang.pyang" class="com.intellij.lang.yang.interfaces.Pyangdis"
+            text="Pyangdis">
+      <add-to-group group-id="MainMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="shift alt D"/>
+    </action>
   </actions>
+
 
 </idea-plugin>

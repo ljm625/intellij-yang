@@ -8,7 +8,6 @@ module acme-foo {
          leaf name {
              type string;
          }
-
          leaf mtu {
              type uint32;
              description "The MTU of the interface.";

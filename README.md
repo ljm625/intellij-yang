@@ -1,3 +1,14 @@
+What's New?
+=============
+I added the pyang support for correcting errors.
+Just press Shift+Alt+D to activate this function.
+(You need to add the pyang to $PATH in order to use it.)
+
+Further Updates arrives soon.Including Structure Tree,Code Auto Implement and Folding.
+
+Feel free to submit any suggestions to ljm625@gmail.com or just open an issue.
+Thank you.
+
 intellij-yang
 =============
 
