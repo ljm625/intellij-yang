@@ -12,9 +12,12 @@ import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.icons.AllIcons;
 import com.intellij.lang.Language;
+import com.intellij.lang.yang.support.SupportThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.compiler.CompileContext;
+import com.intellij.openapi.compiler.CompilerMessageCategory;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -29,6 +32,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.ui.content.Content;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.builtInWebServer.ConsoleManager;
+import org.jetbrains.jps.javac.JavacRemoteProto.Message.Response.CompileMessage;
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -43,9 +47,8 @@ public class Pyangdis extends AnAction {
         Project project = e.getData(PlatformDataKeys.PROJECT);
         //Messages.showMessageDialog(project, "Hello, " + txt + "!\n I am glad to see you.", "Information", Messages
         //    .getInformationIcon());
-
-        ToolWindow toolWindow=null;
-        toolWindow = ToolWindowManager.getInstance(project).getToolWindow("Event Log");
+        ProblemsViewUtil problemsViewUtil=null;
+        problemsViewUtil.clearProblemsView(project);
 
         Document currentDoc = FileEditorManager.getInstance(project).getSelectedTextEditor().getDocument();
         VirtualFile currentFile = FileDocumentManager.getInstance().getFile(currentDoc);
@@ -63,7 +66,12 @@ public class Pyangdis extends AnAction {
         else{
             cmds= "pyang "+ "--path="+includepath+" "+fileName;
         }
-
+        //CompileContext compileContext=null;
+        //compileContext.addMessage(CompilerMessageCategory.ERROR,fileName,"Test1",1,1);
+        SupportThread thread=new SupportThread();
+        thread.postInfo(project,currentFile,includepath);
+        thread.run();
+        /**
         try {
             TextConsoleBuilder consoleBuilder = TextConsoleBuilderFactory.getInstance().createBuilder(project);
             consoleBuilder.addFilter(new ExceptionFilter(GlobalSearchScope.projectScope(project)));
@@ -125,6 +133,8 @@ public class Pyangdis extends AnAction {
         } catch(Exception ioe) {
         ioe.printStackTrace();
         }
+         **/
+
   }
 
     static String loadStream(InputStream in) throws IOException {

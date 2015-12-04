@@ -19,7 +19,6 @@
   <name>Yang Language Plugin</name>
   <version>3.01</version>
   <vendor email="ljm625@gmail.com" url="http://opendaylight.xyz">Jiaming Li</vendor>
-  <vendor email="dave@dtucker.co.uk" url="http://dtucker.co.uk">Dave Tucker</vendor>
 
   <description><![CDATA[
       This plugin adds support for Yang to IntelliJ
@@ -42,7 +41,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileTypeFactory implementation="com.intellij.lang.yang.YangFileTypeFactory"/>
     <lang.parserDefinition language="Yang" implementationClass="com.intellij.lang.yang.YangParserDefinition"/>
-    <lang.syntaxHighlighterFactory implementationClass="com.intellij.lang.yang.editor.YangSyntaxHighlighterFactory"/>
+    <lang.syntaxHighlighterFactory key="Yang" implementationClass="com.intellij.lang.yang.editor.YangSyntaxHighlighterFactory"/>
     <colorSettingsPage implementation="com.intellij.lang.yang.editor.YangColorSettingsPage"/>
     <completion.contributor language="Yang" implementationClass="com.intellij.lang.yang.YangCompletionContributor"/>
   </extensions>
